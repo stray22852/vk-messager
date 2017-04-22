@@ -1,0 +1,63 @@
+{% extends 'messager/index.html' %}
+
+{% block menu %}
+  <div class="user_info">
+    {% if logged.0 != 'empty' %}
+      <div class="user_name">{{ logged.0 }}</div>
+      <img class="user_image" src="{{ logged.1 }}" alt="User">
+      <div class="profile_arrow"></div>
+    {% elif logged.0 == 'empty' %}
+      <div class="user_name">Профиль</div>
+      <img class="user_image" src="/static/images/user.png" alt="User">
+      <div class="profile_arrow"></div>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="message_box">
+    <div class="menu_box">
+      <ul>
+        <li>
+          <a href="{% url 'logout' %}">
+            <div class="img" id="home"></div>
+            <div class="text"><span>Сменить юзера</span></div>
+            <div class="clearboth"></div>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'get_dialogs' %}">
+            <div class="img" id="list"></div>
+            <div class="text"><span>К списку диалогов</span></div>
+            <div class="clearboth"></div>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'set_status' %}">
+            <div class="img" id="status"></div>
+            <div class="text"><span>Сменить статус</span></div>
+            <div class="clearboth"></div>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'get_foto' fr_id=need_id %}">
+            <div class="img" id="materials"></div>
+            <div class="text"><span>Фотки беседы</span></div>
+            <div class="clearboth"></div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="info-photo">
+      <div class="back-to-dialog"><a href="{% url 'dialog' us_id=need_id %}">К диалогу</a></div>
+      <div class="title-foto"><span>{{ name }} (Фото)</span></div>
+      <div class="clearboth"></div>
+    </div>
+    <div class="need_foto">
+      {% for photo in mini_foto %}
+        <a target="_blank" href="{% cycle big_foto.0 big_foto.1 big_foto.2 big_foto.3 big_foto.4 big_foto.5 big_foto.6 big_foto.7 big_foto.8 big_foto.9 big_foto.10 big_foto.11 big_foto.12 big_foto.13 big_foto.14 big_foto.15 big_foto.16 big_foto.17 big_foto.18 big_foto.19 %}"><img src="{{ photo }}" alt="" width="100%"></a>
+      {% endfor %}
+      <div class="clearboth"></div>
+    </div>
+  </div>
+{% endblock %}

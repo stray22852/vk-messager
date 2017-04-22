@@ -1,0 +1,64 @@
+{% extends 'messager/index.html' %}
+
+{% block menu %}
+  <div class="user_info">
+    {% if logged.0 != 'empty' %}
+      <div class="user_name">{{ logged.0 }}</div>
+      <img class="user_image" src="{{ logged.1 }}" alt="User">
+      <div class="profile_arrow"></div>
+    {% elif logged.0 == 'empty' %}
+      <div class="user_name">Профиль</div>
+      <img class="user_image" src="/static/images/user.png" alt="User">
+      <div class="profile_arrow"></div>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="message_box" style="padding-top: 30px; min-height: 548px;">
+    <div class="menu_box">
+      <ul>
+        <li>
+          <a href="{% url 'logout' %}">
+            <div class="img" id="home"></div>
+            <div class="text"><span>Сменить юзера</span></div>
+            <div class="clearboth"></div>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'get_dialogs' %}">
+            <div class="img" id="list"></div>
+            <div class="text"><span>К списку диалогов</span></div>
+            <div class="clearboth"></div>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'set_status' %}">
+            <div class="img" id="status"></div>
+            <div class="text"><span>Сменить статус</span></div>
+            <div class="clearboth"></div>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="title_h2">Введите статус в поле ниже</h2>
+    {% if status.0 == 'false' %}
+      <div class="message_error">
+        <b>Что-то пошло не так :(</b>
+        <p>Возможно, пользователь сейчас прослушивает музыку. Попробуйте позже</p>
+      </div>
+    {% elif status.0 == 'true' %}
+      <div class="message_success">
+        <b>Успех!</b>
+        <p>Статус успешно сменен.</p>
+      </div>
+    {% endif %}
+    <div class="token_form">
+      <form id="new_status" autocomplete="off" method="POST" action="{% url 'sprocess' %}">{% csrf_token %}
+        <input id="st" type="text" name="status" placeholder="Статус">
+        <div class="submit"><input id="set-status" type="submit" value="Сменить"><div class="hidden" id="hidden"><img src="/static/images/rolling.gif" alt=""></div></div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'messager/index.html' %}
+
+{% block menu %}
+  <div class="user_info">
+    {% if logged.0 != 'empty' %}
+      <div class="user_name">{{ logged.0 }}</div>
+      <img class="user_image" src="{{ logged.1 }}" alt="User">
+      <div class="profile_arrow"></div>
+    {% elif logged.0 == 'empty' %}
+      <div class="user_name">Профиль</div>
+      <img class="user_image" src="/static/images/user.png" alt="User">
+      <div class="profile_arrow"></div>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="message_box">
+    <div class="menu_box">
+      <ul>
+        <li>
+          <a href="{% url 'logout' %}">
+            <div class="img" id="home"></div>
+            <div class="text"><span>Сменить юзера</span></div>
+            <div class="clearboth"></div>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'get_dialogs' %}">
+            <div class="img" id="list"></div>
+            <div class="text"><span>К списку диалогов</span></div>
+            <div class="clearboth"></div>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'set_status' %}">
+            <div class="img" id="status"></div>
+            <div class="text"><span>Сменить статус</span></div>
+            <div class="clearboth"></div>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <form action="">
+      <input id="message_search" type="text" placeholder="Поиск">
+      <input id="search_mess" type="submit" value="Поиск">
+    </form>
+    <ul class="message_list">
+      {% for id in users_id %}
+        <li class="message_type">
+          <a href="{% url 'dialog' us_id=id %}">
+            <div class="message_foto"><img src="{% cycle images.0 images.1 images.2 images.3 images.4 images.5 images.6 images.7 images.8 images.9 %}" alt="Алексей"></div>
+            <div class="mess_block">
+              <div class="mes_block">
+                <div class="title_mes"><span>{% cycle users.0 users.1 users.2 users.3 users.4 users.5 users.6 users.7 users.8 users.9 %}</span></div>
+                <div class="body_mess"><span>{% cycle text.0 text.1 text.2 text.3 text.4 text.5 text.6 text.7 text.8 text.9 %}</span></div>
+              </div>
+            </div>
+            <div class="clearboth"></div>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

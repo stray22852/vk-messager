@@ -1,0 +1,65 @@
+{% extends 'messager/index.html' %}
+
+{% block menu %}
+  <div class="user_info">
+    {% if logged.0 != 'empty' %}
+      <div class="user_name">{{ logged.0 }}</div>
+      <img class="user_image" src="{{ logged.1 }}" alt="User">
+      <div class="profile_arrow"></div>
+    {% elif logged.0 == 'empty' %}
+      <div class="user_name">Профиль</div>
+      <img class="user_image" src="/static/images/user.png" alt="User">
+      <div class="profile_arrow"></div>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="message_box">
+    <div class="menu_box">
+      <ul>
+        <li>
+          <a href="{% url 'logout' %}">
+            <div class="img" id="home"></div>
+            <div class="text"><span>Сменить юзера</span></div>
+            <div class="clearboth"></div>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'get_dialogs' %}">
+            <div class="img" id="list"></div>
+            <div class="text"><span>К списку диалогов</span></div>
+            <div class="clearboth"></div>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'set_status' %}">
+            <div class="img" id="status"></div>
+            <div class="text"><span>Сменить статус</span></div>
+            <div class="clearboth"></div>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'get_foto' fr_id=need_id %}">
+            <div class="img" id="materials"></div>
+            <div class="text"><span>Фотки беседы</span></div>
+            <div class="clearboth"></div>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <ul class="MESSAGES">
+      {% for user in users %}
+        <li class="one_mess">
+          <div class="one_mess_img"><img src="{% cycle images.0 images.1 images.2 images.3 images.4 images.5 images.6 images.7 images.8 images.9 images.10 images.11 images.12 images.13 images.14 images.15 images.16 images.17 images.18 images.19 images.20 images.21 images.22 images.23 images.24 images.25 images.26 images.27 images.28 images.29 images.30 images.31 images.32 images.33 images.34 images.35 images.36 images.37 images.38 images.39 images.40 images.41 images.42 images.43 images.44 images.45 images.46 images.47 images.48 images.49 images.50 images.51 images.52 images.53 images.54 images.55 images.56 images.57 images.58 images.59 images.60 images.61 images.62 images.63 images.64 images.65 images.66 images.67 images.68 images.69 images.70 images.71 images.72 images.73 images.74 images.75 images.76 images.77 images.78 images.79 %}" alt=""></div>
+          <div class="one_mess_text">
+            <div class="mess_name"><span class="us_name">{{ user }}</span><span class="mess_time">&emsp;{% cycle date.0 date.1 date.2 date.3 date.4 date.5 date.6 date.7 date.8 date.9 date.10 date.11 date.12 date.13 date.14 date.15 date.16 date.17 date.18 date.19 date.20 date.21 date.22 date.23 date.24 date.25 date.26 date.27 date.28 date.29 date.30 date.31 date.32 date.33 date.34 date.35 date.36 date.37 date.38 date.39 date.40 date.41 date.42 date.43 date.44 date.45 date.46 date.47 date.48 date.49 date.50 date.51 date.52 date.53 date.54 date.55 date.56 date.57 date.58 date.59 date.60 date.61 date.62 date.63 date.64 date.65 date.66 date.67 date.68 date.69 date.70 date.71 date.72 date.73 date.74 date.75 date.76 date.77 date.78 date.79 %}</span></div>
+            <div class="mess_text"><span class="TEXT">{% cycle text.0 text.1 text.2 text.3 text.4 text.5 text.6 text.7 text.8 text.9 text.10 text.11 text.12 text.13 text.14 text.15 text.16 text.17 text.18 text.19 text.20 text.21 text.22 text.23 text.24 text.25 text.26 text.27 text.28 text.29 text.30 text.31 text.32 text.33 text.34 text.35 text.36 text.37 text.38 text.39 text.40 text.41 text.42 text.43 text.44 text.45 text.46 text.47 text.48 text.49 text.50 text.51 text.52 text.53 text.54 text.55 text.56 text.57 text.58 text.59 text.60 text.61 text.62 text.63 text.64 text.65 text.66 text.67 text.68 text.69 text.70 text.71 text.72 text.73 text.74 text.75 text.76 text.77 text.78 text.79 %}</span></div>
+          </div>
+          <div class="clearboth"></div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

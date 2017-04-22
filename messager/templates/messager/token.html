@@ -1,0 +1,33 @@
+{% extends 'messager/index.html'  %}
+
+{% block menu %}
+  <div class="user_info">
+    {% if logged.0 != 'empty' %}
+      <div class="user_name">{{ logged.0 }}</div>
+      <img class="user_image" src="{{ logged.1 }}" alt="User">
+      <div class="profile_arrow"></div>
+    {% elif logged.0 == 'empty' %}
+      <div class="user_name">Профиль</div>
+      <img class="user_image" src="/static/images/user.png" alt="User">
+      <div class="profile_arrow"></div>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="give_token">
+    <h2 class="title_h2">Введите токен в поле ниже</h2>
+    {% if errors.0 == 'error!' %}
+      <div class="message_error">
+        <b>Не удалось войти.</b>
+        <p>Возможно, вы ввели токен неверно. Проверьте правильность ввода и попробуйте еще раз.</p>
+      </div>
+    {% endif %}
+    <div class="token_form">
+      <form action="{% url 'get_dialogs' %}" method="POST" autocomplete="off">{% csrf_token %}
+        <input type="text" name="token" placeholder="Токен">
+        <div class="submit"><input id="give_token" type="submit" value="Загрузить сообщения"><div class="hidden" id="hidden"><img src="/static/images/rolling.gif" alt=""></div></div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

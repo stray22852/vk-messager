@@ -1,0 +1,54 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% if page == 'home' %}
+    <title>Авторизация</title>
+  {% elif page == 'dialogs' %}
+    <title>Список диалогов</title>
+  {% elif page == 'mess' %}
+    <title>Диалог</title>
+  {% elif page == 'photo' %}
+    <title>Фотографии</title>
+  {% elif page == 'status' %}
+    <title>Сменить статус</title>
+  {% endif %}
+  <link rel="shortcut icon" href="{% static 'images/fav_logo.ico' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="content">
+      <header>
+        <div class="content">
+          <div class="left_logo">
+            <div class="logo"></div>
+          </div>
+          <div class="search">
+            <form action="">
+              <input id="search" type="text" placeholder="Поиск">
+            </form>
+          </div>
+          <div class="items">
+            <div class="news"><div class="ico"></div></div>
+            <div class="music"><div class="ico"></div></div>
+          </div>
+          {% block menu %}
+          {% endblock %}
+          <div class="clearboth"></div>
+        </div>
+      </header>
+      <div class="main">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>
